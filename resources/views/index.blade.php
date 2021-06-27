@@ -70,7 +70,7 @@
       </div>
       <div class="modal-footer justify-content-between">
         <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-        <button type="submit" class="btn btn-primary" onclick="">Buat Pesanan</button>
+        <button type="submit" class="btn btn-success" onclick="">Buat Pesanan</button>
       </div>
     </form>
 
@@ -146,10 +146,13 @@ $(function () {
                 <div class="gallery-image row">
                 	@foreach($produk as $prd => $pr)
                   <div class="img-box col-lg-3 col-md-6 col-sm-6">
-                    <img src="{{ asset('foto_produk/'.$pr->gambar) }}" alt="product" class="img-responsive ">
+                    <img src="{{ asset('foto_produk/'.$pr->gambar) }}" alt="product" class="img-responsive " style="width:300px; height: 300px;">
                     <h5 class="my-2"><a href="{{route('about')}}">{{ $pr->nama }}</a></h5>
                     <p class="para">{{ $pr->deskripsi }}.</p>
                     <br>
+                    <p class="para">{{ $pr->harga }}</p>
+                    <br>
+
                     <a href="#pesan" class="btn btn-primary tombol" onclick="buat_pesanan( {{ $pr->id }} )">Order</a>
                   </div>
                   @endforeach

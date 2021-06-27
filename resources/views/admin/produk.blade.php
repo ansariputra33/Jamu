@@ -92,15 +92,15 @@
                   <div class="form-group">
                     <input type="hidden" class="form-control" name="_token" id="token" placeholder="Enter email" value="{{ csrf_token() }}">
                     <label for="exampleInputEmail1">Nama</label>
-                    <input type="text" class="form-control" name="nama" id="exampleInputEmail1" placeholder="Nama Produk">
+                    <input type="text" class="form-control" name="nama" id="nama_store" placeholder="Nama Produk">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Harga</label>
-                    <input type="number" class="form-control" name="harga" id="exampleInputPassword1" placeholder="Harga Produk">
+                    <input type="number" class="form-control" name="harga" id="harga_store" placeholder="Harga Produk">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Stok</label>
-                    <input name="stok" type="number" class="form-control" id="exampleInputPassword1" placeholder="Jumlah Stok">
+                    <input name="stok" type="number" class="form-control" id="stok_store" placeholder="Jumlah Stok">
                   </div>
                   <div class="form-group">
                     <label>Deskripsi</label>
@@ -110,17 +110,20 @@
                     <label for="exampleInputFile">File input</label>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input type="file" id="gambar" class="custom-file-input" name="gambar[]" id="exampleInputFile" multiple>
+                        <input type="file" id="gambar" class="custom-file-input" name="gambar" id="gambar" onchange="prev_img(this);" >
                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                       </div>
                     </div>
+                  </div>
+                  <div class="form-group" id="gambar_prev">
+                    <img src="" id="imgx" style="width: 425px;">
                   </div>
                 </div>
               </div>
             </div>
                 <!-- /.card-body -->
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" onclick=" product()">Batal</button>
               <button type="submit" class="btn btn-primary" onclick="">Simpan Produk</button>
             </div>
             </form>
@@ -148,8 +151,8 @@
             
             </div>
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn-primary" onclick="">Simpan Produk</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" onclick="product()">Batal</button>
+              <button type="submit" class="btn btn-primary" >Update Produk</button>
             </div>
           </form>
 
@@ -162,6 +165,21 @@
 
 
       <script type="text/javascript">
+        // var prev_img = () => {
+          
+          function prev_img(input) {
+            ''
+            if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function (e) { 
+                document.querySelector("#imgx").setAttribute("src",e.target.result);
+              };
+              reader.readAsDataURL(input.files[0]); 
+            }
+          }
+
+//         }
+        
         $('#store_form').submit(function(e) {
          // $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
           e.preventDefault();
@@ -178,7 +196,7 @@
               $('#token').val('{{ csrf_token() }}')
               alert('Data has been uploaded successfully');
               //$("#tb_products").DataTable().reload();
-              product();
+             
               console.log(data);
             },
             error: function(data){
@@ -197,7 +215,7 @@
             async: true,
             //data: {isi:new FormData($('#store_form')[0])},
             success: function (res) {
-              console.log(res);
+              //console.log(res);
               $(`#modal_edit_produk .modal-dialog .modal-body`).html('');
               $(`#modal_edit_produk .modal-dialog .modal-body`).html(res);
               $(`#modal_edit_produk`).modal('show');
@@ -226,39 +244,41 @@
             success: (data) => {
               //this.reset();
               alert('Data has been updated successfully');
-              product();
-              //$("#tb_products").DataTable().reload();
-             // produk_fetch(0);
-              console.log(data);
+               
             },
             error: function(data){
-              console.log(data);
+              alert('Process Failed!');
               }
           });
+
+          //product();
         });
 
         var delete_produk = (p) => {
-          $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
-          $.ajax({
-           // type: "POST",
-            timeout: 50000,
-           // url: 'pengaturan/logs',
-            url: '/produk/delete/'+p,
-            async: true,
-            success: function (res) {
-              console.log(res);
-              alert('Data has been deleted successfully');
-              product();
-              //produk_fetch(0);
-            },
-            error: function (res, textstatus) {
-              if (textstatus === "timeout") {
-                notice('Response Time Out', 'error');
-              } else {
-                notice(res.responseJSON.message, 'error');
+          var konf = confirm("Yakin Hapus Data?");
+          if (konf) {
+            $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+            $.ajax({
+             // type: "POST",
+              timeout: 50000,
+             // url: 'pengaturan/logs',
+              url: '/produk/delete/'+p,
+              async: true,
+              success: function (res) {
+                console.log(res);
+                alert('Data has been deleted successfully');
+                product();
+                //produk_fetch(0);
+              },
+              error: function (res, textstatus) {
+                if (textstatus === "timeout") {
+                  notice('Response Time Out', 'error');
+                } else {
+                  notice(res.responseJSON.message, 'error');
+                }
               }
-            }
-          });
+            });
+          }  
         }
         $(function () {
           var tbl_produk = $("#tb_products").DataTable({

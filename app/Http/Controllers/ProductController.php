@@ -62,12 +62,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // if ($request->gambar != null ) {
-        //     $gambar = $request->gambar->getClientOriginalName();
-        // }else{
-        //     $gambar = '';
-        // } 
-        //$request->gambar[0]->getClientOriginalExtension(); 
+       
         $result = Products::create([
             'nama' => $request->nama,
             'harga' => $request->harga,
@@ -79,26 +74,17 @@ class ProductController extends Controller
         if ($result) {
             if ($request->gambar != null ) {
                 if ($files = $request->file('gambar')) {
-                    foreach ($request->gambar as $key => $value) {
-                        $foto = FotoProduk::create([
-                            'id_produk' => $result->id,
-                            'nama'      => $result->id.'_'.$key.'.'.$value->getClientOriginalExtension()
-                        ]);
-
-                        $path = public_path() . '/foto_produk/';
+                    $path = public_path() . '/foto_produk/';
+                    $files->move($path,$result->id.'.'.$files->getClientOriginalExtension());
                     
-
-                        $value->move($path,$result->id.'_'.$key.'.'.$value->getClientOriginalExtension());   
-                    }
-                  $up_result = Products::find($result->id);
-                  $up_result->gambar = $result->id.'_'.$key.'.'.$request->gambar[0]->getClientOriginalExtension();
-                  $up_result->save();         
+                    $up_result = Products::find($result->id);
+                    $up_result->gambar = $result->id.'.'.
+                    $request->gambar->getClientOriginalExtension();
+                    $up_result->save();
+                           
                 }
             }
-
         }
-
-        
     }
 
     /**
@@ -143,15 +129,13 @@ class ProductController extends Controller
         if ($result) {
             if ($request->gambar != null ) {
                 if ($files = $request->file('gambar')) {
-                    foreach ($request->gambar as $key => $value) {
-                        $foto = FotoProduk::create([
-                            'id_produk' => $result->id,
-                            'nama'      => $result->id.'_'.$key.'.'.$value->getClientOriginalExtension()
-                        ]);
-
-                        $path = public_path() . '/foto_produk/';
-                        $value->move($path,$result->id.'_'.$key.'.'.$value->getClientOriginalExtension());   
-                    }       
+                    $path = public_path() . '/foto_produk/';
+                    $files->move($path,$result->id.'.'.$files->getClientOriginalExtension());
+                    
+                    $up_result = Products::find($result->id);
+                    $up_result->gambar = $result->id.'.'.
+                    $request->gambar->getClientOriginalExtension();
+                    $up_result->save();      
                 }
             }   
         }

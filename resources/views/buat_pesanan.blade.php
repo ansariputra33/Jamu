@@ -23,21 +23,8 @@
         <div class="form-group">
           <label>Deskripsi Produk : {{ $data->deskripsi }}</label>
         </div>
-
-        <div class="form-group">
-          <label for="exampleInputFile">Gambar Gambar</label>
-          <div class="row">
-            @foreach($data->foto as $foto => $ft)
-            <div class="col-md-12 col-lg-6 col-xl-4">
-              <div class="card mb-2 bg-gradient-dark">
-                <img class="card-img-top" src="{{ asset('foto_produk/'.$ft['nama']) }}" alt="Dist Photo 1">
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                  
-                </div>
-              </div>
-            </div>
-          @endforeach
-          </div>
+        <div class="form-group" id="gambar_prev">
+          <img src="{{ asset('foto_produk/'.$data->gambar) }}" id="imgx_e" style="width: 300px; height: 200px;">
         </div>
       </div>
     </div>

@@ -67,7 +67,7 @@
                         </span>
                         @elseif( $d->status == 3 )
                         <span class="badge bg-danger">
-                          Selesai
+                          Dibatalkan
                         </span>
                         @endif 
                       </td>
@@ -76,17 +76,19 @@
                         
                           <button class="btn btn-sm btn-success" onclick="terima({!! $d->id !!})">Terima
                         </button>
-                        <button class="btn btn-sm btn-danger" onclick="batal_pesanan({!! $d->id !!})">Batalkan
+                        <button class="btn btn-sm btn-danger" onclick="batal({!! $d->id !!})">Batalkan
                         </button>
                         
                         @elseif( $d->status == 1 )
-                        <button class="btn btn-sm btn-primary" onclick="selesai_pesanan({!! $d->id !!})">Selesai
+                        <button class="btn btn-sm btn-primary" onclick="selesai({!! $d->id !!})">Selesai
                         </button>
                           
-                        <button class="btn btn-sm btn-danger" onclick="batal_pesanan({!! $d->id !!})">Batalkan
+                        <button class="btn btn-sm btn-danger" onclick="batal({!! $d->id !!})">Batalkan
                         </button>
                         
                         @elseif( $d->status == 2 )
+                          <button class="btn btn-sm btn-primary" >Telah Selesai
+                        </button>  
                         
                         @endif
                         
@@ -224,25 +226,28 @@
         }
 
         var batal = (p) => {
-          $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
-          $.ajax({
-           // type: "POST",
-            timeout: 50000,
-           // url: 'pengaturan/logs',
-            url: '/pesanan/terima/'+p,
-            async: true,
-            //data: {isi:new FormData($('#store_form')[0])},
-            success: function (res) {
-              alert('Status Pesan Telah Dikonfirmasi');
-            },
-            error: function (res, textstatus) {
-              if (textstatus === "timeout") {
-                notice('Response Time Out', 'error');
-              } else {
-                notice(res.responseJSON.message, 'error');
+          if(confirm("Balkan Pesanan?")){
+            $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+            $.ajax({
+             // type: "POST",
+              timeout: 50000,
+             // url: 'pengaturan/logs',
+              url: '/pesanan/batal/'+p,
+              async: true,
+              //data: {isi:new FormData($('#store_form')[0])},
+              success: function (res) {
+                alert('Status Pesan Telah Dibatalkan');
+                pesanan()
+              },
+              error: function (res, textstatus) {
+                if (textstatus === "timeout") {
+                  notice('Response Time Out', 'error');
+                } else {
+                  notice(res.responseJSON.message, 'error');
+                }
               }
-            }
-          });
+            });
+          }
         }
         var selesai = (p) => {
           $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
@@ -250,11 +255,12 @@
            // type: "POST",
             timeout: 50000,
            // url: 'pengaturan/logs',
-            url: '/pesanan/terima/'+p,
+            url: '/pesanan/selesai/'+p,
             async: true,
             //data: {isi:new FormData($('#store_form')[0])},
             success: function (res) {
-              alert('Status Pesan Telah Dikonfirmasi');
+              alert('Status Pesan Telah Selesai');
+              pesanan()
             },
             error: function (res, textstatus) {
               if (textstatus === "timeout") {
