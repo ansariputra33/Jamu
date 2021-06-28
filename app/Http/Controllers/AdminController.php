@@ -59,6 +59,7 @@ class AdminController extends Controller
     public function profilUpdate(Request $request)
     {
         $result = InfoDesa::find(1);
+        $result->judul = $request->judul;
         $result->deskripsi = $request->deskripsi;
         $result->save();
 

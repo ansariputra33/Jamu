@@ -41,12 +41,14 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
+      {{-- 
       <li class="nav-item d-none d-sm-inline-block">
         <a href="index3.html" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>
+      --}}
     </ul>
 
     <!-- Right navbar links -->
@@ -183,7 +185,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
@@ -202,7 +204,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </div> --}}
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -220,7 +222,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link" onclick="product();">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fa fa-boxes"></i>
               <p>
                 Product
                 
@@ -229,7 +231,7 @@
           </li>
           <li class="nav-item ">
             <a href="#" class="nav-link" onclick="pesanan();">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fa fa-clipboard-list"></i>
               <p>
                 Pesanan
                 
@@ -238,7 +240,7 @@
           </li>
           <li class="nav-item ">
             <a href="#" class="nav-link" onclick="profil();">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <i class="nav-icon fa fa-info"></i>
               <p>
                 Info Desa
                 
@@ -286,7 +288,7 @@
                 <p>Pesanan Selesai</p>
               </div>
               <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="fa fa-check-double"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -301,7 +303,7 @@
                 <p>Pesanan Terkonfirmasi</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fa fa-check"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -316,7 +318,7 @@
                 <p>Pesanan Baru</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="fa fa-exclamation"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -331,7 +333,7 @@
                 <p>Pesanan Batal</p>
               </div>
               <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <i class="fa fa-times"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -340,6 +342,7 @@
         </div>
         <!-- /.row -->
         <!-- Main row -->
+        {{-- 
         <div class="row">
           <!-- Left col -->
           <section class="col-lg-7 connectedSortable">
@@ -851,6 +854,7 @@
           </section>
           <!-- right col -->
         </div>
+        --}}
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
     </section>

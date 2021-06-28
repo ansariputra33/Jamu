@@ -38,7 +38,7 @@ Route::get("/", [indexController::class, 'halutama' ])->name('home');
 Route::get("/login", [loginController::class, 'login']);
 Route::get("/register", [RegisterController::class,'create']);
 
-Route::get("/about", [aboutController::class, 'about'])->name('about');
+Route::get("/about", [IndexController::class, 'about'])->name('about');
 
 Route::get("/checkout", [checkoutController::class, 'checkout'])->name('checkout');
 

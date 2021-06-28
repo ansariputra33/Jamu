@@ -13,7 +13,15 @@
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Harga</label>
-      <input type="number" class="form-control" name="harga" id="update_harga" placeholder="Harga Produk" value="{{ $data->harga }}">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Rp.</span>
+        </div>
+        <input type="text" class="form-control" name="harga" id="update_harga" value="{{ $data->harga }}">
+        <div class="input-group-append">
+        </div>
+      </div>
+      {{--<input type="number" class="form-control" name="harga" id="update_harga" placeholder="Harga Produk" value=""> --}}
       </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Stok</label>

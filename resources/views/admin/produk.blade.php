@@ -94,9 +94,19 @@
                     <label for="exampleInputEmail1">Nama</label>
                     <input type="text" class="form-control" name="nama" id="nama_store" placeholder="Nama Produk">
                   </div>
+                  
                   <div class="form-group">
                     <label for="exampleInputPassword1">Harga</label>
-                    <input type="number" class="form-control" name="harga" id="harga_store" placeholder="Harga Produk">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Rp.</span>
+                      </div>
+                      <input type="text" class="form-control" name="harga" id="harga_store" onkeyup="format_harga(this)">
+                      <div class="input-group-append" >
+                      </div>
+                    </div>
+                    {{--
+                    <input type="number" class="form-control" name="harga" id="harga_store" placeholder="Harga Produk"> --}}
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Stok</label>
@@ -279,6 +289,11 @@
               }
             });
           }  
+        }
+
+        function format_harga(t){
+          
+          //t.value = x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
         }
         $(function () {
           var tbl_produk = $("#tb_products").DataTable({

@@ -30,7 +30,7 @@
                 <p>Pesanan Selesai</p>
               </div>
               <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="fa fa-check-double"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -45,7 +45,7 @@
                 <p>Pesanan Terkonfirmasi</p>
               </div>
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="fa fa-check"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -60,7 +60,7 @@
                 <p>Pesanan Baru</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="fa fa-exclamation"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -75,7 +75,7 @@
                 <p>Pesanan Batal</p>
               </div>
               <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <i class="fa fa-times"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -84,6 +84,7 @@
         </div>
         <!-- /.row -->
         <!-- Main row -->
+        {{-- 
         <div class="row">
           <!-- Left col -->
           <section class="col-lg-7 connectedSortable">
@@ -595,6 +596,7 @@
           </section>
           <!-- right col -->
         </div>
+        --}}
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
     </section>

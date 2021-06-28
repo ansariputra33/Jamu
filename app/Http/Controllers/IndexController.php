@@ -5,13 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Models\Products;
 use \App\Models\Pesanan;
+use \App\Models\InfoDesa;
 
 class IndexController extends Controller
 {
     public function halutama()
     {
         $produk = Products::paginate(20);
-        return view ('index',compact('produk'));
+        $desa = InfoDesa::find(1);
+        return view ('index',compact('produk','desa'));
+    }
+
+    public function about()
+    {
+        //$produk = Products::paginate(20);
+        $desa = InfoDesa::find(1);
+        return view ('about',compact('desa'));
     }
 
     public function buat_pesanan($id)

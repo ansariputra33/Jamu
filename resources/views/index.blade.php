@@ -149,7 +149,6 @@ $(function () {
                     <img src="{{ asset('foto_produk/'.$pr->gambar) }}" alt="product" class="img-responsive " style="width:300px; height: 300px;">
                     <h5 class="my-2"><a href="{{route('about')}}">{{ $pr->nama }}</a></h5>
                     <p class="para">{{ $pr->deskripsi }}.</p>
-                    <br>
                     <p class="para">{{ $pr->harga }}</p>
                     <br>
 
@@ -359,8 +358,6 @@ $('#pesanan_form').submit(function(e) {
       $('#token').val('{{ csrf_token() }}')
       alert('Order has been created successfully');
       $('#kode').html(data);
-      //$("#tb_products").DataTable().reload();
-      //produk_fetch(0);
       console.log(data);
     },
     error: function(data){

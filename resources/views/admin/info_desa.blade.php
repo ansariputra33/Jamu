@@ -27,8 +27,12 @@
           <div class="col-7">
             <form id="data_form" enctype="multipart/form-data">
               <div class="form-group">
-                <label for="inputSubject">Gambar</label>
+                <label for="inputSubject">Judul</label>
                 <input type="hidden" class="form-control" name="_token" id="token" placeholder="Enter email" value="{{ csrf_token() }}">
+                <input type="text" id="judul_ds" name="judul" value="{{ $data->judul }}" class="form-control"  />
+              </div>
+              <div class="form-group">
+                <label for="inputSubject">Gambar</label>
                 <input type="file" id="gbr_ds" name="gambar_desa" class="form-control" onchange="prev_img_ds(this)" />
               </div>
               <div class="form-group">

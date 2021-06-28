@@ -117,15 +117,14 @@ $(function () {
 <div class="row">
 
 	<div class="my-bio col-lg-6">
-		<h3>We Deliver Good Food
-			Offer Great Smile</h3>
-	<p class="para mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit inventore deleniti dolore sequi labore similique vitae .inventore deleniti dolore sequi labore similique vitae quae est.</p>
+		<h3>{{ $desa->judul }}</h3>
+	<p class="para mb-3">{{ $desa->deskripsi }}.</p>
 	<p class="para mb-3">Cum quo maiores asperiores sequi error alias mollitia? Voluptatibus impedit aliquid pr Lorem ipsum dolor sit amet consectetur adipisicing elit.inventore deleniti dolore sequi labore similique vitae quae est.</p>
 	<a href="{{route('about')}}" class="action-button btn mt-3">Read more</a>
 	</div>
 
 	<div class="col-lg-6 ">
-	<img src="assets/images/b4.jpg" alt="product" class="img-responsive about-me">
+	<img src="{{ asset('foto_desa/'.$desa->gambar) }}" alt="product" class="img-responsive about-me">
 	</div>
 </div>
 		</div>
@@ -137,7 +136,7 @@ $(function () {
 	  <div class="container">
 		<div class="footer-list-29 footer-1 ">
 				<h2><a href="{{route('home')}}" class="footer-logo"><span class="fa fa-cutlery"></span> cutlery </a></h2>
-				<p class="para">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Saepe qui repellat nam vero consectetur dicta eos suscipit. Numquam at minus architecto asperiores cupiditate. At molestias laborum voluptatibus numquam aperiam in.</p>
+				<p class="para">{{ $desa->judul }}.</p>
 	
 		  </div>
 		<div class="row footer-top-29">
