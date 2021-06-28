@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Pesanan;
+use App\Models\InfoDesa;
 
 class AdminController extends Controller
 {
@@ -50,25 +51,30 @@ class AdminController extends Controller
 
     public function profil()
     {
-        $data = [];
-        $data['new_o'] = Pesanan::where('status',0)->get()->count();
-        $data['konf_o'] = Pesanan::where('status',1)->get()->count();
-        $data['ok_o'] = Pesanan::where('status',2)->get()->count();
-        $data['canc_o'] = Pesanan::where('status',3)->get()->count();
-
-        return view('admin.profil',compact('data'));     
+        $data = InfoDesa::find(1);
+        return view('admin.info_desa',compact('data'));     
         
     }
 
     public function profilUpdate(Request $request)
     {
-        $data = [];
-        $data['new_o'] = Pesanan::where('status',0)->get()->count();
-        $data['konf_o'] = Pesanan::where('status',1)->get()->count();
-        $data['ok_o'] = Pesanan::where('status',2)->get()->count();
-        $data['canc_o'] = Pesanan::where('status',3)->get()->count();
+        $result = InfoDesa::find(1);
+        $result->deskripsi = $request->deskripsi;
+        $result->save();
 
-        return view('admin.profil',compact('data'));     
+        if ($result) {
+            if ($request->gambar_desa != null ) {
+                if ($files = $request->file('gambar_desa')) {
+                    $path = public_path() . '/foto_desa/';
+                    $files->move($path,$result->id.'.'.$files->getClientOriginalExtension());
+                    
+                    $up_result = InfoDesa::find($result->id);
+                    $up_result->gambar = $result->id.'.'.
+                    $request->gambar_desa->getClientOriginalExtension();
+                    $up_result->save();      
+                }
+            }   
+        }   
         
     }
 

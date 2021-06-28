@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class desa extends Model
+class InfoDesa extends Model
 {
-    use HasFactory;
-
-    protected $fillable = [
-        'Judul', 'Gambar', 'Deskripsi'
-    ];
+    //use HasFactory;
+    protected $table = 'info_desa';
+    protected $guarded = [];
 }
