@@ -114,19 +114,21 @@ $(function () {
 <section class="w3l-recent-work">
 	<div class="jst-two-col">
 		<div class="container">
-<div class="row">
+			@foreach($desa as $ds => $d)
+			<div class="row">
 
-	<div class="my-bio col-lg-6">
-		<h3>{{ $desa->judul }}</h3>
-	<p class="para mb-3">{{ $desa->deskripsi }}.</p>
-	<p class="para mb-3">Cum quo maiores asperiores sequi error alias mollitia? Voluptatibus impedit aliquid pr Lorem ipsum dolor sit amet consectetur adipisicing elit.inventore deleniti dolore sequi labore similique vitae quae est.</p>
-	<a href="{{route('about')}}" class="action-button btn mt-3">Read more</a>
-	</div>
+				<div class="my-bio col-lg-8">
+					<h3>{{ $d->judul }}</h3>
+				<p class="para mb-3">{{ $d->deskripsi }}.</p>
+				
+				<a href="/detail/{{$d->id}}" class="action-button btn mt-3">Read more</a>
+				</div>
 
-	<div class="col-lg-6 ">
-	<img src="{{ asset('foto_desa/'.$desa->gambar) }}" alt="product" class="img-responsive about-me">
-	</div>
-</div>
+				<div class="col-lg-4">
+				<img src="{{ asset('foto_desa/'.$d->gambar) }}" alt="product" class="img-responsive about-me">
+				</div>
+			</div>
+			@endforeach
 		</div>
 	</div>
 </section>
@@ -136,7 +138,7 @@ $(function () {
 	  <div class="container">
 		<div class="footer-list-29 footer-1 ">
 				<h2><a href="{{route('home')}}" class="footer-logo"><span class="fa fa-cutlery"></span> cutlery </a></h2>
-				<p class="para">{{ $desa->judul }}.</p>
+				
 	
 		  </div>
 		<div class="row footer-top-29">

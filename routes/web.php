@@ -56,7 +56,10 @@ Route::middleware(['admin'])->group(function () {
     Route::get("/dashboard", [AdminController::class, 'dashboard'])->name('dashboard');
 
     Route::get("/profil", [AdminController::class, 'profil'])->name('profil');
-    Route::post("/profil-update", [AdminController::class, 'profilUpdate'])->name('profil-update');     
+    Route::post("/info-add", [AdminController::class, 'infoAdd'])->name('info-add');
+    Route::get("/info-edit/{i}", [AdminController::class, 'editInfo'])->name('info-edit');
+    Route::post("/profil-update", [AdminController::class, 'profilUpdate'])->name('profil-update');
+    Route::get("/info-delete/{i}", [AdminController::class, 'deleteInfo'])->name('info-delete');     
 
     Route::get("/produk/list", [ProductController::class, 'list'])->name('produk-list');
     Route::get("/produk/fetch/{s}", [ProductController::class, 'list_fetch'])->name('produk-fetch');

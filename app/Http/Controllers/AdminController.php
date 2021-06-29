@@ -51,8 +51,37 @@ class AdminController extends Controller
 
     public function profil()
     {
-        $data = InfoDesa::find(1);
+        $data = InfoDesa::all();
         return view('admin.info_desa',compact('data'));     
+        
+    }
+
+    public function infoAdd(Request $request)
+    {
+        $result = InfoDesa::create([
+            'judul' => $request->judul,
+            'deskripsi' => $request->deskripsi
+        ]);
+
+        if ($result) {
+            if ($request->gambar_desa != null ) {
+                if ($files = $request->file('gambar_desa')) {
+                    $path = public_path() . '/foto_desa/';
+                    $files->move($path,$result->id.'.'.$files->getClientOriginalExtension());
+                    
+                    $up_result = InfoDesa::find($result->id);
+                    $up_result->gambar = $result->id.'.'.
+                    $request->gambar_desa->getClientOriginalExtension();
+                    $up_result->save();      
+                }
+            }   
+        }       
+    }
+
+    public function editInfo($id)
+    {
+        $data = InfoDesa::find($id);
+        return view('admin.edit_info_desa',compact('data'));     
         
     }
 
@@ -75,10 +104,15 @@ class AdminController extends Controller
                     $up_result->save();      
                 }
             }   
-        }   
-        
+        }       
     }
 
+    public function deleteInfo($id)
+    {
+        $data = InfoDesa::find($id)->delete();
+        //return view('admin.edit_info_desa',compact('data'));     
+        
+    }
 
     public function profilDes()
     {

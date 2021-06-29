@@ -19,7 +19,7 @@ class IndexController extends Controller
     public function about()
     {
         //$produk = Products::paginate(20);
-        $desa = InfoDesa::find(1);
+        $desa = InfoDesa::paginate(5);
         return view ('about',compact('desa'));
     }
 
