@@ -129,6 +129,7 @@ $(function () {
 				</div>
 			</div>
 			@endforeach
+			{{ $desa->links() }}
 		</div>
 	</div>
 </section>
