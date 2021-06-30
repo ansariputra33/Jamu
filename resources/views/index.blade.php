@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/style-starter.css')}}">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
   </head>
   <body id="home">
 <section class=" w3l-header-4 header-sticky">
@@ -141,58 +142,24 @@ $(function () {
                 <h3 class="header-name ">
                   Macam-macam Jamu
                 </h3>
-                <p class="tiltle-para  ">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic fuga sit illo modi aut aspernatur tempore laboriosam saepe dolores eveniet.</p>
+                <p class="tiltle-para  ">Berikut Daftar Produk Jamu yang Kami Sediakan</p>
             </div>
                 <div class="gallery-image row">
+                	
                 	@foreach($produk as $prd => $pr)
-                  <div class="img-box col-lg-3 col-md-6 col-sm-6">
-                    <img src="{{ asset('foto_produk/'.$pr->gambar) }}" alt="product" class="img-responsive " style="width:300px; height: 300px;">
-                    <h5 class="my-2"><a href="{{route('about')}}">{{ $pr->nama }}</a></h5>
-                    <p class="para">{{ $pr->deskripsi }}.</p>
-                    <p class="para">{{ $pr->harga }}</p>
-                    <br>
 
-                    <a href="#pesan" class="btn btn-primary tombol" onclick="buat_pesanan( {{ $pr->id }} )">Order</a>
+                  <div class="img-box col-lg-4 col-md-6 col-sm-6">
+                    <img src="{{ asset('foto_produk/'.$pr->gambar) }}" alt="product" class="img-responsive " style="width:280px; height: 250px;">
+                    <h5 class="my-2"><a href="" style="display:inline;">{{ $pr->nama }}</a> </h5>
+                    	<strong> Rp. {{ number_format($pr->harga,0) }} </strong>
+                    	<div style="height: 5px;"></div>
+                    <p class="" style="font-size: 13px;">Deskripsi : {{ substr( $pr->deskripsi,0,49) }}, Klik Order untuk Melihat Detail!</p>
+                  		<div style="height: 7px;"></div>
+                    <center> <a style="margin-left: -50px;" href="#pesan" class="btn btn-primary" onclick="buat_pesanan( {{ $pr->id }} )">Order</a></center>
+                    
+                    
                   </div>
                   @endforeach
-
-                  {{--  
-                  <div class="img-box col-lg-4 col-md-6 col-sm-6">
-                    <img src="assets/images/herbal bottle.jpeg" alt="product" class="img-responsive ">
-                    <h5 class="my-2"><a href="{{route('about')}}">Garlic Roast Chicken</a></h5>
-                    <p class="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet itaque labor.</p>
-                    <br>
-                    <a href="{{route('checkout')}}" class="btn btn-primary tombol">Order</a>
-                  </div>
-                  <div class="img-box col-lg-4 col-md-6 col-sm-6">
-                    <img src="assets/images/herbal bottle.jpeg" alt="product" class="img-responsive ">
-                    <h5 class="my-2"><a href="about.html">Butter pecan caramel</a></h5>
-                    <p class="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet itaque labor.</p>
-                    <br>
-                    <a href="{{route('checkout')}}" class="btn btn-primary tombol">Order</a>
-                  </div>
-                    <div class="img-box col-lg-4 col-md-6 col-sm-6">
-                      <img src="assets/images/herbal bottle.jpeg" alt="product" class="img-responsive ">
-                      <h5 class="my-2"><a href="about.html">Stuffed Baby Eggplant</a></h5>
-                      <p class="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet itaque labor.</p>
-                      <br>
-                      <a href="{{route('checkout')}}" class="btn btn-primary tombol">Order</a>
-                    </div>
-                    <div class="img-box col-lg-4 col-md-6 col-sm-6">
-                      <img src="assets/images/herbal bottle.jpeg" alt="product" class="img-responsive ">
-                      <h5 class="my-2"><a href="about.html">Classic Key Lime Pie </a></h5>
-                      <p class="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet itaque labor.</p>
-                      <br>
-                      <a href="{{route('checkout')}}" class="btn btn-primary tombol">Order</a>
-                    </div>
-                    <div class="img-box col-lg-4 col-md-6 col-sm-6">
-                      <img src="assets/images/herbal bottle.jpeg" alt="product" class="img-responsive ">
-                      <h5 class="my-2"><a href="about.html">Classic Stuffed PEPPERS</a></h5>
-                      <p class="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet itaque labor.</p>
-                      <br>
-                      <a href="{{route('checkout')}}" class="btn btn-primary tombol">Order</a>
-                    </div>
-                    --}}
                   </div>
                   <div class="row">
                   	<div class="img-box col-lg-12">

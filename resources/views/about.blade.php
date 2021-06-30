@@ -115,14 +115,13 @@ $(function () {
 	<div class="jst-two-col">
 		<div class="container">
 			@foreach($desa as $ds => $d)
-				<div class="row" style="margin-bottom: 20px;">
-					<div class="col-lg-5 ">
-					<img src="{{ asset('foto_desa/'.$d->gambar)}}" alt="product" class="img-responsive about-me" style="width:100%;">
-					</div>
-					<div class="my-bio col-lg-7">
+				<div class="row" style="margin-bottom: 40px;">
+					<div class="my-bio col-lg-8">
 						<h3>{{ $d->judul }}</h3>
 					<p class="para mb-3">{{ $d->deskripsi }}.</p>
-					<a href="#" class="action-button btn mt-3">Read more</a>
+					</div>
+					<div class="col-lg-4 ">
+					<img src="{{ asset('foto_desa/'.$d->gambar)}}" alt="product" class="img-responsive about-me" style="width:100%;">
 					</div>
 
 				</div>	
