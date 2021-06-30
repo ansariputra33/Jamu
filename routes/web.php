@@ -44,9 +44,9 @@ Route::get("/checkout", [checkoutController::class, 'checkout'])->name('checkout
 
 
 //route untuk admin LTE
-// Route::get('/produk/list', function () {
-//     return view('admin.tesv');
-// });
+Route::get('/about2', function () {
+    return view('about2');
+});
 
 
 Route::post("/admin/auth", [AdminController::class, 'auth'])->name('admin-auth');
