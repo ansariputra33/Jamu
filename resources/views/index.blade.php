@@ -45,6 +45,9 @@
 						<li class="nav-item @@about__active">
 							<a class="nav-link" href="{{route('about')}}">About</a>
 						</li>
+						<li class="nav-item @@about__active">
+							<a class="nav-link" href="{{route('cek-pesanan')}}">Cek Pesanan</a>
+						</li>
 					</ul>
 				</div>
 			</nav>

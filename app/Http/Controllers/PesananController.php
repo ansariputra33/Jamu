@@ -20,6 +20,36 @@ class PesananController extends Controller
         return view('admin.pesanan',compact('data'));
     }
 
+    public function cek()
+    {
+        $data = Pesanan::with(['produk_data'])->get();
+        return view('pesanan',compact('data'));
+    }
+
+    public function cari(Request $request)
+    {
+        if ($request->tipe == 1) {
+            $pesanan = Pesanan::with(['produk_data'])->where('kode',$request->nilai)->first();
+            if ($pesanan == null) {
+                return 'Hasil Tidak Ditemukan, Silahkan Cari Menggunakan Tipe atau Nomor Lain';
+            }
+            return view('admin.detail_pesanan',compact('pesanan'));
+        }elseif($request->tipe == 2) {
+            $pesanan = Pesanan::with(['produk_data'])->where('nama_pemesan',$request->nilai)->first();
+            if ($pesanan == null) {
+                return 'Hasil Tidak Ditemukan, Silahkan Cari Menggunakan Tipe atau Nama Lain';
+            }
+            return view('admin.detail_pesanan',compact('pesanan'));
+        }elseif($request->tipe == 3) {
+            $pesanan = Pesanan::with(['produk_data'])->where('hp_pemesan',$request->nilai)->first();
+            if ($pesanan == null) {
+                return 'Hasil Tidak Ditemukan, Silahkan Cari Menggunakan Tipe atau Nomor Hp Lain';
+            }
+            return view('admin.detail_pesanan',compact('pesanan'));
+        }
+        
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -30,7 +60,22 @@ class PesananController extends Controller
         //
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function detail($id)
+    {
+        $pesanan = Pesanan::with(['produk_data'])->find($id);
+        return view('admin.detail_pesanan',compact('pesanan'));
+        // $pesanan->status = 1;
+        // $pesanan->save();
 
+        // $produk = Products::find($pesanan->produk);
+        // $produk->stok = $produk->stok - $pesanan->kuantitas;
+        // $produk->save();
+    }
 
     /**
      * Show the form for creating a new resource.

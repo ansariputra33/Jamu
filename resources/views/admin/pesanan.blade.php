@@ -73,20 +73,26 @@
                       </td>
                       <td> 
                         @if( $d->status == 0 )
-                        
+                        <button class="btn btn-sm btn-info" onclick="detail({!! $d->id !!})">Detail
+                        </button>
                           <button class="btn btn-sm btn-success" onclick="terima({!! $d->id !!})">Terima
                         </button>
                         <button class="btn btn-sm btn-danger" onclick="batal({!! $d->id !!})">Batalkan
                         </button>
                         
                         @elseif( $d->status == 1 )
+                        <button class="btn btn-sm btn-info" onclick="detail({!! $d->id !!})">Detail
+                        </button>
                         <button class="btn btn-sm btn-primary" onclick="selesai({!! $d->id !!})">Selesai
                         </button>
                           
                         <button class="btn btn-sm btn-danger" onclick="batal({!! $d->id !!})">Batalkan
                         </button>
-                        
+                       
                         @elseif( $d->status == 2 )
+                        <button class="btn btn-sm btn-info" onclick="detail({!! $d->id !!})">Detail
+                        </button>
+
                           <button class="btn btn-sm btn-primary" >Telah Selesai
                         </button>  
                         
@@ -160,8 +166,7 @@
             </div>
                 <!-- /.card-body -->
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn-primary" onclick="">Simpan Produk</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
             </div>
             </form>
           </div>
@@ -171,11 +176,11 @@
         <!-- /.modal-dialog -->
       
 
-      <div class="modal fade" id="modal_edit_produk">
-        <div class="modal-dialog">
+      <div class="modal fade" id="modal_detail_pesanan">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Edit Produk</h4>
+              <h4 class="modal-title">Detail Pesanan</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -188,8 +193,7 @@
             
             </div>
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-              <button type="submit" class="btn btn-primary" onclick="">Simpan Produk</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
             </div>
           </form>
 
@@ -202,6 +206,31 @@
 
 
       <script type="text/javascript">
+        
+        var detail = (p) => {
+          $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+          $.ajax({
+           // type: "POST",
+            timeout: 50000,
+           // url: 'pengaturan/logs',
+            url: '/pesanan/detail/'+p,
+            async: true,
+            //data: {isi:new FormData($('#store_form')[0])},
+            success: function (res) {
+              $(`#modal_detail_pesanan .modal-dialog .modal-body`).html('');
+              $(`#modal_detail_pesanan .modal-dialog .modal-body`).html(res);
+              $(`#modal_detail_pesanan`).modal('show');
+            },
+            error: function (res, textstatus) {
+              if (textstatus === "timeout") {
+                notice('Response Time Out', 'error');
+              } else {
+                notice(res.responseJSON.message, 'error');
+              }
+            }
+          });
+        }
+
         var terima = (p) => {
           $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
           $.ajax({

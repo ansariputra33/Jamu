@@ -13,7 +13,7 @@
     <title>Jamu Kromengan</title>
 
     <!-- Template CSS -->
-    <link rel="stylesheet" href="assets/css/style-starter.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/style-starter.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   </head>
@@ -41,11 +41,11 @@
 						<li class="nav-item @@home__active">
 							<a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
 						</li>
-						<li class="nav-item active">
+						<li class="nav-item ">
 							<a class="nav-link" href="{{route('about')}}">About</a>
 						</li>
-						<li class="nav-item @@about__active">
-							<a class="nav-link" href="{{route('cek-pesanan')}}">Cek Pesanan</a>
+						<li class="nav-item active">
+							<a class="nav-link" href="{{route('about')}}">Cek Pesanan</a>
 						</li>
 					</ul>
 				</div>
@@ -102,37 +102,48 @@ $(function () {
     <section class="w3l-inner-banner-main">
         <div class="about-inner about ">
             <div class="container">   
-            <div class="breadcrumbs-sub">
-                <ul class="breadcrumbs-custom-path">
-                    <li class="right-side "><a href="{{route('home')}}" class="">Home <span class="fa fa-angle-right" aria-hidden="true"></span></a> <p></li>
-                    <li class="active ">About</li>
-                </ul>
-            </div>
-</div>
+            
+					</div>
 
-   </div>
+   		</div>
     </section>
 <!-- breadcrumbs //-->
 
 <section class="w3l-recent-work">
 	<div class="jst-two-col">
 		<div class="container">
-			@foreach($desa as $ds => $d)
-				<div class="row" style="margin-bottom: 40px;">
-					<div class="my-bio col-lg-8">
-						<h3>{{ $d->judul }}</h3>
-					<p class="para mb-3">{{ $d->deskripsi }}.</p>
-					</div>
-					<div class="col-lg-4 ">
-					<img src="{{ asset('foto_desa/'.$d->gambar)}}" alt="product" class="img-responsive about-me" style="width:100%;">
-					</div>
-
-				</div>	
-			@endforeach
-			
-	<p></p>
+			<div class="row" style="margin-bottom: 40px;">
+				<div class="my-bio col-lg-3">
+					<h3>Cari Pesanan</h3>
+					<form id="form_cari">
+					<div class="form-group">
+			          <label for="exampleInputEmail1">Cari Menggunakan </label>
+			          <select class="form-control" name="tipe" id="tipe">
+			          	<option value="1">Nomor/Kode Pemesanan</option>
+			          	<option value="2">Nama Pemesan</option>
+			          	<option value="3">Nomor Hp Pemesan</option>
+			          </select>
+			        </div>
+			        <div class="form-group">
+			          <label for="exampleInputPassword1">Nilai Pencarian</label>
+			          <input id="nilai" type="text" class="form-control" name="hp" id="exampleInputEmail1" placeholder="Masukkan Nilai Pencarian" value="" required="">
+			        </div>
+			        <div class="form-group">
+			        	<button type="submit" class="btn btn-primary">Mulai Pencarian</button>
+			        	<a href="https://web.whatsapp.com/" target="_blank">
+			        		<button type="button" class="btn btn-success">Buka WA</button></a>
+			        </div>
+			        </form>
+			        
+				<p class="para mb-3"></p>
+				</div>
+				<div class="col-lg-9" id="detail_pesanan">
+					Silahkan Mencari Pesanan Dengan Nomor Pesanan / Nama Pemesan / No. Hp Pemesan 
+				<img src="" alt="product" class="img-responsive about-me" style="width:100%;">
+				</div>
+			</div>	
 		</div>
-		<div class="container">{{ $desa->links() }}</div>
+		<div class="container"></div>
 	</div>
 </section>
 
@@ -180,6 +191,10 @@ $(function () {
 <button onclick="topFunction()" id="movetop" title="Go to top">
 	<span class="fa fa-long-arrow-up"></span>
 </button>
+<!-- jQuery -->
+<script src="{{ asset('plugins/jquery/jquery.min.js')}}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <script>
 	// When the user scrolls down 20px from the top of the document, show the button
 	window.onscroll = function () {
@@ -199,6 +214,32 @@ $(function () {
 		document.body.scrollTop = 0;
 		document.documentElement.scrollTop = 0;
 	}
+	$("#form_cari").submit(function(e){
+		e.preventDefault();
+	  $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+      $.ajax({
+       type: "POST",
+        timeout: 50000,
+       // url: 'pengaturan/logs',
+        url: '/pesanan/cari/',
+        async: true,
+        data: {'_token':'{{ csrf_token() }}',tipe:$('#tipe').val(),nilai:$('#nilai').val()},
+        success: function (res) {
+          $(`#detail_pesanan`).html('');
+          $(`#detail_pesanan`).html(res);
+          //$(`#modal_detail_pesanan`).modal('show');
+        },
+        error: function (res, textstatus) {
+          if (textstatus === "timeout") {
+            notice('Response Time Out', 'error');
+          } else {
+            notice(res.responseJSON.message, 'error');
+          }
+        }
+      });
+	});
+      
+    
 </script>
 <!-- /move top -->
 </body>

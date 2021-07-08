@@ -69,6 +69,9 @@ Route::middleware(['admin'])->group(function () {
     Route::get("/produk/delete/{p}", [ProductController::class, 'delete'])->name('produk-delete');
 
     Route::get("/pesanan/list", [PesananController::class, 'list'])->name('list-pesanan');
+    Route::get("/pesanan/cek", [PesananController::class, 'cek'])->name('cek-pesanan');
+    Route::post("/pesanan/cari", [PesananController::class, 'cari'])->name('cari-pesanan');
+    Route::get("/pesanan/detail/{id}", [PesananController::class, 'detail'])->name('detail-pesanan');
     Route::get("/pesanan/terima/{id}", [PesananController::class, 'terima'])->name('terima-pesanan');
     Route::get("/pesanan/selesai/{id}", [PesananController::class, 'selesai'])->name('selesai-pesanan');
     Route::get("/pesanan/batal/{id}", [PesananController::class, 'batal'])->name('batal-pesanan');
