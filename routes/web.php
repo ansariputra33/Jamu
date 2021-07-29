@@ -12,6 +12,7 @@ use App\Http\Controllers\categoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +42,11 @@ Route::get("/register", [RegisterController::class,'create']);
 Route::get("/about", [IndexController::class, 'about'])->name('about');
 
 Route::get("/checkout", [checkoutController::class, 'checkout'])->name('checkout');
-
+Route::get("/pesanan/tes", [PesananController::class, 'test'])->name('tes-pesanan');
+Route::get("/pesanan/cek", [PesananController::class, 'cek'])->name('cek-pesanan');
+Route::get("/pesanan/detail/{id}", [PesananController::class, 'detail'])->name('detail-pesanan');
+Route::post("/pesanan/cari", [PesananController::class, 'cari'])->name('cari-pesanan');
+Route::post("/pesanan/bayar", [PesananController::class, 'bayar'])->name('bayar-pesanan');
 
 //route untuk admin LTE
 Route::get('/about2', function () {
@@ -69,12 +74,13 @@ Route::middleware(['admin'])->group(function () {
     Route::get("/produk/delete/{p}", [ProductController::class, 'delete'])->name('produk-delete');
 
     Route::get("/pesanan/list", [PesananController::class, 'list'])->name('list-pesanan');
-    Route::get("/pesanan/cek", [PesananController::class, 'cek'])->name('cek-pesanan');
-    Route::post("/pesanan/cari", [PesananController::class, 'cari'])->name('cari-pesanan');
-    Route::get("/pesanan/detail/{id}", [PesananController::class, 'detail'])->name('detail-pesanan');
+    
     Route::get("/pesanan/terima/{id}", [PesananController::class, 'terima'])->name('terima-pesanan');
+    Route::get("/pesanan/tolak/{id}", [PesananController::class, 'tolak'])->name('tolak-pesanan');
     Route::get("/pesanan/selesai/{id}", [PesananController::class, 'selesai'])->name('selesai-pesanan');
     Route::get("/pesanan/batal/{id}", [PesananController::class, 'batal'])->name('batal-pesanan');
+
+    Route::get("/pembayaran/list", [PembayaranController::class, 'list'])->name('list-pembayaran');
 
 });
 

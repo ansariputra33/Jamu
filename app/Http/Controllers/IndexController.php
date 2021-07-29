@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \App\Models\Products;
 use \App\Models\Pesanan;
 use \App\Models\InfoDesa;
+use \App\Notifications\OrderProcessed;
 
 class IndexController extends Controller
 {
@@ -43,7 +44,11 @@ class IndexController extends Controller
         $up_result = Pesanan::find($result->id);
         $up_result->kode = 'OR'.date("dmY").$result->id;
         $up_result->save();
+
+        #$request->hp::notify(new OrderProcessed($up_result));
+
         return $up_result->kode;
+
         //return view("buat_pesanan",['data' => $result]);
     }
 }

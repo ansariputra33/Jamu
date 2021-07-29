@@ -57,45 +57,57 @@
                         <span class="badge bg-warning">
                           Menunggu Konfirmasi
                         </span>
-                        @elseif( $d->status == 1 )
+                        @elseif( $d->status == 1 or $d->status == 4 )
                         <span class="badge bg-success">
-                          Dikonfimasi
+                          Menunggu Pembayaran
                         </span>
                         @elseif( $d->status == 2 )
                         <span class="badge bg-primary">
                           Selesai
                         </span>
                         @elseif( $d->status == 3 )
+                        <span class="badge bg-success">
+                          Bukti Bayar Ada
+                        </span>
+                        @elseif( $d->status == 5 )
+                        <span class="badge bg-primary">
+                          Selesai
+                        </span>
+                        @elseif( $d->status == 6 )
                         <span class="badge bg-danger">
                           Dibatalkan
                         </span>
+
                         @endif 
                       </td>
                       <td> 
                         @if( $d->status == 0 )
                         <button class="btn btn-sm btn-info" onclick="detail({!! $d->id !!})">Detail
                         </button>
-                          <button class="btn btn-sm btn-success" onclick="terima({!! $d->id !!})">Terima
+                          <button class="btn btn-sm btn-success" onclick="terima({!! $d->id !!})">Konfirmasi
                         </button>
                         <button class="btn btn-sm btn-danger" onclick="batal({!! $d->id !!})">Batalkan
                         </button>
                         
-                        @elseif( $d->status == 1 )
+                        @elseif( $d->status == 1 or $d->status == 4 )
                         <button class="btn btn-sm btn-info" onclick="detail({!! $d->id !!})">Detail
                         </button>
-                        <button class="btn btn-sm btn-primary" onclick="selesai({!! $d->id !!})">Selesai
-                        </button>
-                          
                         <button class="btn btn-sm btn-danger" onclick="batal({!! $d->id !!})">Batalkan
                         </button>
                        
-                        @elseif( $d->status == 2 )
+                        @elseif( $d->status == 2 or $d->status == 6  )
+                        <button class="btn btn-sm btn-info" onclick="detail({!! $d->id !!})">Detail
+                        </button>  
+                         @elseif( $d->status == 3 )
                         <button class="btn btn-sm btn-info" onclick="detail({!! $d->id !!})">Detail
                         </button>
-
-                          <button class="btn btn-sm btn-primary" >Telah Selesai
-                        </button>  
-                        
+                        <button class="btn btn-sm btn-success" onclick="selesai({!! $d->id !!})">Selesai
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="tolak({!! $d->id !!})">Tolak Bukti
+                        </button>
+                        @elseif( $d->status == 5 )
+                        <button class="btn btn-sm btn-info" onclick="detail({!! $d->id !!})">Detail
+                        </button>
                         @endif
                         
                       </td>
@@ -203,8 +215,6 @@
         <!-- /.modal-dialog -->
         </div>
       </div>
-
-
       <script type="text/javascript">
         
         var detail = (p) => {
@@ -220,6 +230,7 @@
               $(`#modal_detail_pesanan .modal-dialog .modal-body`).html('');
               $(`#modal_detail_pesanan .modal-dialog .modal-body`).html(res);
               $(`#modal_detail_pesanan`).modal('show');
+              $(`#detail_bayar`).show();
             },
             error: function (res, textstatus) {
               if (textstatus === "timeout") {
@@ -278,6 +289,32 @@
             });
           }
         }
+
+        var tolak = (p) => {
+          if(confirm("Tolak Bukti Pembayaran?")){
+            $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+            $.ajax({
+             // type: "POST",
+              timeout: 50000,
+             // url: 'pengaturan/logs',
+              url: '/pesanan/tolak/'+p,
+              async: true,
+              //data: {isi:new FormData($('#store_form')[0])},
+              success: function (res) {
+                alert('Bukti Pesanan Ditolak');
+                pesanan()
+              },
+              error: function (res, textstatus) {
+                if (textstatus === "timeout") {
+                  notice('Response Time Out', 'error');
+                } else {
+                  notice(res.responseJSON.message, 'error');
+                }
+              }
+            });
+          }
+        }
+
         var selesai = (p) => {
           $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
           $.ajax({

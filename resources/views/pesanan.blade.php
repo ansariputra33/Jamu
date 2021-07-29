@@ -55,46 +55,10 @@
 	<!--/header-->
 </section>
 
-<script src="assets/js/jquery-3.3.1.min.js"></script> <!-- Common jquery plugin -->
-<!--bootstrap working-->
-<script src="assets/js/bootstrap.min.js"></script>
+
 <!-- //bootstrap working-->
 <!--/MENU-JS-->
-<script>
-	$(window).on("scroll", function () {
-	  var scroll = $(window).scrollTop();
-  
-	  if (scroll >= 80) {
-		$("#site-header").addClass("nav-fixed");
-	  } else {
-		$("#site-header").removeClass("nav-fixed");
-	  }
-	});
-  
-	//Main navigation Active Class Add Remove
-	$(".navbar-toggler").on("click", function () {
-	  $("header").toggleClass("active");
-	});
-	$(document).on("ready", function () {
-	  if ($(window).width() > 991) {
-		$("header").removeClass("active");
-	  }
-	  $(window).on("resize", function () {
-		if ($(window).width() > 991) {
-		  $("header").removeClass("active");
-		}
-	  });
-	});
-  </script>
-  <!--//MENU-JS-->
-<!-- disable body scroll which navbar is in active -->
-<script>
-$(function () {
-  $('.navbar-toggler').click(function () {
-    $('body').toggleClass('noscroll');
-  })
-});
-</script>
+
 <!-- disable body scroll which navbar is in active -->
 
 
@@ -113,7 +77,7 @@ $(function () {
 	<div class="jst-two-col">
 		<div class="container">
 			<div class="row" style="margin-bottom: 40px;">
-				<div class="my-bio col-lg-3">
+				<div class="my-bio col-lg-4">
 					<h3>Cari Pesanan</h3>
 					<form id="form_cari">
 					<div class="form-group">
@@ -130,14 +94,21 @@ $(function () {
 			        </div>
 			        <div class="form-group">
 			        	<button type="submit" class="btn btn-primary">Mulai Pencarian</button>
-			        	<a href="https://web.whatsapp.com/" target="_blank">
-			        		<button type="button" class="btn btn-success">Buka WA</button></a>
+			        	
+			        		<button type="button" class="btn btn-success" id="xx" disabled="">Buka WA</button>
+			        </div>
+			        <div class="form-group">
+			        	<label for=""><u><strong>Penting!</strong></u> </label>
+			        	<label for="">Nomor Rekening Pembayaran 1 : <strong>XXXXXXXX</strong> </label>
+			        	<label for="">Atas Nama : <strong>XXXXXXXX</strong> </label>
+			        	<label for="">Nomor Rekening Pembayaran 2 : <strong>XXXXXXXX</strong> </label>
+			        	<label for="">Atas Nama : <strong>XXXXXXXX</strong> </label>
 			        </div>
 			        </form>
 			        
 				<p class="para mb-3"></p>
 				</div>
-				<div class="col-lg-9" id="detail_pesanan">
+				<div class="col-lg-8" id="detail_pesanan">
 					Silahkan Mencari Pesanan Dengan Nomor Pesanan / Nama Pemesan / No. Hp Pemesan 
 				<img src="" alt="product" class="img-responsive about-me" style="width:100%;">
 				</div>
@@ -195,6 +166,85 @@ $(function () {
 <script src="{{ asset('plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- ChartJS -->
+<script src="{{ asset('plugins/chart.js/Chart.min.js')}}"></script>
+<!-- Sparkline -->
+<script src="{{ asset('plugins/sparklines/sparkline.js')}}"></script>
+<!-- JQVMap -->
+<script src="{{ asset('plugins/jqvmap/jquery.vmap.min.js')}}"></script>
+<script src="{{ asset('plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
+<!-- jQuery Knob Chart -->
+<script src="{{ asset('plugins/jquery-knob/jquery.knob.min.js')}}"></script>
+<!-- daterangepicker -->
+<script src="{{ asset('plugins/moment/moment.min.js')}}"></script>
+<script src="{{ asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+<!-- Summernote -->
+<script src="{{ asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
+<!-- overlayScrollbars -->
+<script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('dist/js/adminlte.js')}}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ asset('dist/js/demo.js')}}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{{ asset('dist/js/pages/dashboard.js')}}"></script>
+<!-- AdminLTE dDataTable) -->
+<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('assets/plugins/jszip/jszip.min.js')}}"></script>
+<script src="{{ asset('assets/plugins/pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{ asset('assets/plugins/pdfmake/vfs_fonts.js')}}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+<script>
+	$(window).on("scroll", function () {
+	  var scroll = $(window).scrollTop();
+  
+	  if (scroll >= 80) {
+		$("#site-header").addClass("nav-fixed");
+	  } else {
+		$("#site-header").removeClass("nav-fixed");
+	  }
+	});
+  
+	//Main navigation Active Class Add Remove
+	$(".navbar-toggler").on("click", function () {
+	  $("header").toggleClass("active");
+	});
+	$(document).on("ready", function () {
+	  if ($(window).width() > 991) {
+		$("header").removeClass("active");
+	  }
+	  $(window).on("resize", function () {
+		if ($(window).width() > 991) {
+		  $("header").removeClass("active");
+		}
+	  });
+	});
+  </script>
+  <!--//MENU-JS-->
+<!-- disable body scroll which navbar is in active -->
+<script>
+$(function () {
+  $('.navbar-toggler').click(function () {
+    $('body').toggleClass('noscroll');
+  })
+});
+</script>
 <script>
 	// When the user scrolls down 20px from the top of the document, show the button
 	window.onscroll = function () {
@@ -227,6 +277,8 @@ $(function () {
         success: function (res) {
           $(`#detail_pesanan`).html('');
           $(`#detail_pesanan`).html(res);
+          $(`#tbl_bayar`).show();
+
           //$(`#modal_detail_pesanan`).modal('show');
         },
         error: function (res, textstatus) {
@@ -238,10 +290,40 @@ $(function () {
         }
       });
 	});
-      
-    
+	$( "#xx" ).click(function() {
+	  $("#modal_bayar").modal("show");
+	}); 
 </script>
 <!-- /move top -->
+
+<div class="modal fade" id="modal_bayar">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Bayar Pesanan</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="pesanan_form" enctype="multipart/form-data">
+      <div class="modal-body">
+        <!-- /.card-header -->
+        
+          <!-- /.card-body -->
+      
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+        <button type="submit" class="btn btn-success" onclick="">Buat Pesanan</button>
+      </div>
+    </form>
+
+    
+    <!-- /.modal-content -->
+    </div>
+  <!-- /.modal-dialog -->
+  </div>
+</div>
 </body>
 
 </html>

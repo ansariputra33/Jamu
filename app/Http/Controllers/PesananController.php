@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use \App\Models\Pesanan;
 use \App\Models\Products;
+use \App\Models\Pembayaran;
+use GuzzleHttp;
 
 class PesananController extends Controller
 {
@@ -18,6 +20,31 @@ class PesananController extends Controller
     {
         $data = Pesanan::with(['produk_data'])->get();
         return view('admin.pesanan',compact('data'));
+    }
+
+    public function test()
+    {
+        $data = json_encode([
+          "token"=>"d8e261f4fe47bc026e78d447f9dfb77a",
+          "source"=>6285242218273,
+          "destination"=>6285251748953,
+          "type">"text",
+          "body"=>[
+              "text"=>"Hello Word"
+          ]
+        ]);
+
+        //return $data;
+        $client = new GuzzleHttp\Client();
+        $response = $client->request('POST','http://waping.es/api/send',
+            ['headers' =>['Content-Type' => 'application/json'],
+            'json' => $data
+        ]);
+        return response()->json([
+            'status_code'=> $response->getStatusCode(),
+            'body'       => $response->getBody()
+        ]);
+        return $response->getStatusCode();
     }
 
     public function cek()
@@ -67,7 +94,7 @@ class PesananController extends Controller
      */
     public function detail($id)
     {
-        $pesanan = Pesanan::with(['produk_data'])->find($id);
+        $pesanan = Pesanan::with(['produk_data','pembayaran_data'])->find($id);
         return view('admin.detail_pesanan',compact('pesanan'));
         // $pesanan->status = 1;
         // $pesanan->save();
@@ -93,15 +120,22 @@ class PesananController extends Controller
         $produk->save();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function tolak($id)
+    {
+        $pesanan = Pesanan::with(['pembayaran_data'])->find($id);
+        $pesanan->status = 4;
+        $pesanan->save();
+
+        if ($pesanan) {
+            Pembayaran::where('id_pesanan',$id)->delete();
+        }
+
+    }
+
     public function selesai($id)
     {
         $pesanan = Pesanan::find($id);
-        $pesanan->status = 2;
+        $pesanan->status = 5;
         $pesanan->save();
 
     }
@@ -114,12 +148,36 @@ class PesananController extends Controller
     public function batal($id)
     {
         $pesanan = Pesanan::find($id);
-        $pesanan->status = 3;
+        $pesanan->status = 6;
         $pesanan->save();
 
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function bayar(Request $request)
+    {
+        $result = Pembayaran::create([
+            'id_pesanan' => $request->id_pesanan,
+            'bukti'      => ''
+        ]); 
 
+        if ($files = $request->file('bukti')) {
+            $path = public_path() . '/bukti_bayar/';
+            $files->move($path,'bukti_bayar_'.$result->id.'.'.$files->getClientOriginalExtension());
+            
+            $up_result = Pembayaran::find($result->id);
+            $up_result->bukti = 'bukti_bayar_'.$result->id.'.'.$request->bukti->getClientOriginalExtension();
+            $up_result->save();
+
+            $pesanan = Pesanan::find($request->id_pesanan);
+            $pesanan->status = 3;
+            $pesanan->save();           
+        }
+    }
 
     /**
      * Store a newly created resource in storage.

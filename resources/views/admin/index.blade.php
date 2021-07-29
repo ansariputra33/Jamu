@@ -247,6 +247,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item ">
+            <a href="#" class="nav-link" onclick="pembayaran();">
+              <i class="nav-icon fa fa-file-invoice-dollar"></i>
+              <p>
+                Pembayaran
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -1013,6 +1021,32 @@
       timeout: 50000,
      // url: 'pengaturan/logs',
       url: '/profil',
+      async: true,
+     // data: {'transaksi': transaksi, 'id' : id},
+      success: function (res) {
+       // console.log(res);
+        $(`#content_data`).html('');
+        $(`#content_data`).html(res);
+        //$(`#modal_detail_data`).modal('show');
+      },
+      error: function (res, textstatus) {
+        if (textstatus === "timeout") {
+          notice('Response Time Out', 'error');
+        } else {
+          notice(res.responseJSON.message, 'error');
+        }
+      }
+    });
+  }
+
+  const pembayaran = () => {
+      //console.log(url);
+    $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+    $.ajax({
+      //type: "POST",
+      timeout: 50000,
+     // url: 'pengaturan/logs',
+      url: '/pembayaran/list',
       async: true,
      // data: {'transaksi': transaksi, 'id' : id},
       success: function (res) {
