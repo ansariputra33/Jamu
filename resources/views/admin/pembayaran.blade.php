@@ -42,7 +42,7 @@
                     <tr>
                       <td>{{ $dt + 1 }}</td>
                       <td>{{ $d->pesanan_data['kode'] }}</td>
-                      <td><img src="{{ asset('bukti_bayar/'.$d->bukti) }}"></td>
+                      <td><img src="{{ asset('bukti_bayar/'.$d->bukti) }}" style="height: 100px;"></td>
                       
                     </tr>
                     @endforeach
