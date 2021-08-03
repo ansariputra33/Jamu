@@ -74,7 +74,7 @@
       </div>
       
       <div class="card-body">
-        <img src="{{ asset('bukti_bayar/'.$pesanan->pembayaran_data['bukti']) }}">
+        <img src="{{ asset('bukti_bayar/'.$pesanan->pembayaran_data['bukti']) }}" style="height:180px;">
       </div>
     </div>
     
@@ -148,7 +148,7 @@
        <div class="row">
         <div class="col-lg-7">
           <div class=" text-center d-flex align-items-center justify-content-center">
-            <img src="" style="width: 100%;" id="img_ds">
+            <img src="" id="img_ds" style="height:200px;">
           </div>    
         </div>
         <div class="col-lg-5">
@@ -212,6 +212,7 @@
       success: (data) => {
         $('#token').val('{{ csrf_token() }}')
         alert('Data has been uploaded successfully');
+        $("#modal_bayar2").modal("hide");
       },
       error: function(data){
         console.log(data);
