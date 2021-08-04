@@ -73,8 +73,8 @@
         <h5 class="card-title">Bukti Bayar</h5>
       </div>
       
-      <div class="card-body">
-        <img src="{{ asset('bukti_bayar/'.$pesanan->pembayaran_data['bukti']) }}" style="height:180px;">
+      <div class="card-body" style="text-align: center;">
+        <img src="{{ asset('bukti_bayar/'.$pesanan->pembayaran_data['bukti']) }}" style="height:350px;">
       </div>
     </div>
     
@@ -148,7 +148,7 @@
        <div class="row">
         <div class="col-lg-7">
           <div class=" text-center d-flex align-items-center justify-content-center">
-            <img src="" id="img_ds" style="height:200px;">
+            <img src="" id="img_ds" style="height:350px;">
           </div>    
         </div>
         <div class="col-lg-5">
