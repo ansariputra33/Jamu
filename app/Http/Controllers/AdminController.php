@@ -114,6 +114,14 @@ class AdminController extends Controller
         
     }
 
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+        return redirect('login');     
+        
+    }
+
+
     public function profilDes()
     {
         $village = VillageProfiles::latest()->paginate(5);

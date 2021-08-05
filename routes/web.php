@@ -58,6 +58,7 @@ Route::post("/admin/auth", [AdminController::class, 'auth'])->name('admin-auth')
 Route::middleware(['admin'])->group(function () {
 
     Route::get("/admin", [AdminController::class, 'index'])->name('admin');
+    Route::get("/logout", [AdminController::class, 'logout'])->name('logout');
     Route::get("/dashboard", [AdminController::class, 'dashboard'])->name('dashboard');
 
     Route::get("/profil", [AdminController::class, 'profil'])->name('profil');

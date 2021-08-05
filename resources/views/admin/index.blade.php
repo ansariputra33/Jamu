@@ -54,6 +54,7 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
+      {{--
       <li class="nav-item">
         <a class="nav-link" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>
@@ -169,6 +170,11 @@
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
         </a>
+      </li>--}}
+      <li class="nav-item">
+         <a class="nav-link"   href="/logout" role="button" onclick="" title="Logout">
+          <i class="fa fa-power-off"></i>
+        </a>
       </li>
     </ul>
   </nav>
@@ -179,7 +185,7 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src="{{ asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">Admin</span>
     </a>
 
     <!-- Sidebar -->
@@ -358,7 +364,7 @@
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">
-                  <i class="fas fa-chart-pie mr-1"></i>
+                  <i class="fas fa-chart-pie mr-1"></i>c
                   Sales
                 </h3>
                 <div class="card-tools">
@@ -1066,6 +1072,32 @@
   }
 
   const produk_fetch = (n) => {
+      //console.log(url);
+    $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+    $.ajax({
+      //type: "POST",
+      timeout: 50000,
+     // url: 'pengaturan/logs',
+      url: '/produk/fetch/'+n,
+      async: true,
+     // data: {'transaksi': transaksi, 'id' : id},
+      success: function (res) {
+       // console.log(res);
+        $(`#produk_data`).html('');
+        $(`#produk_data`).html(res);
+        //$(`#modal_detail_data`).modal('show');
+      },
+      error: function (res, textstatus) {
+        if (textstatus === "timeout") {
+          notice('Response Time Out', 'error');
+        } else {
+          notice(res.responseJSON.message, 'error');
+        }
+      }
+    });
+  }
+
+  const logout = (n) => {
       //console.log(url);
     $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
     $.ajax({
