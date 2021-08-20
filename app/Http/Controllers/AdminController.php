@@ -30,8 +30,8 @@ class AdminController extends Controller
         $data = [];
         $data['new_o'] = Pesanan::where('status',0)->get()->count();
         $data['konf_o'] = Pesanan::where('status',1)->get()->count();
-        $data['ok_o'] = Pesanan::where('status',2)->get()->count();
-        $data['canc_o'] = Pesanan::where('status',3)->get()->count();
+        $data['ok_o'] = Pesanan::where('status',5)->get()->count();
+        $data['canc_o'] = Pesanan::where('status',6)->get()->count();
 
         return view('admin.index',compact('data'));     
         
@@ -42,8 +42,8 @@ class AdminController extends Controller
         $data = [];
         $data['new_o'] = Pesanan::where('status',0)->get()->count();
         $data['konf_o'] = Pesanan::where('status',1)->get()->count();
-        $data['ok_o'] = Pesanan::where('status',2)->get()->count();
-        $data['canc_o'] = Pesanan::where('status',3)->get()->count();
+        $data['ok_o'] = Pesanan::where('status',5)->get()->count();
+        $data['canc_o'] = Pesanan::where('status',6)->get()->count();
 
         return view('admin.dashboard',compact('data'));     
         
